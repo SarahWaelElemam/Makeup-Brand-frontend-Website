@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLAMOUR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f2f2f2, #dddddd); /* Light gradient gray background */
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(to bottom, #ffcccc, #ff99cc); /* Light pink gradient background */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Navigation styles */
+        nav {
+            background: linear-gradient(to bottom, #222222, #333333);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 5px;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        nav a:hover {
+            background-color: #444;
+        }
+
+        /* Main content styles */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto 100px; /* Added margin-bottom to create space between product card and footer */
+            padding: 0 20px;
+        }
+
+        /* Product grid styles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+            justify-items: center;
+        }
+
+        /* Product card styles */
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-card .product-info {
+            padding: 20px;
+        }
+
+        .product-card .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .product-card .product-price {
+            font-size: 1.2rem;
+            color: #ff0066;
+            margin-bottom: 10px;
+        }
+
+        .product-card .product-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #ff0066;
+            color: #fff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #ff0055;
+        }
+        #cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        #cart-icon svg {
+            width: 30px;
+            height: 30px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: -300px; /* Start from outside of the viewport */
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            animation: slideInRight 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 2.5s forwards;
+            z-index: 9999;
+        }
+
+        @keyframes slideInRight {
+            from {
+                right: -300px;
+            }
+            to {
+                right: 20px;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        /* Footer styles */
+        footer {
+            background: linear-gradient(to bottom, #000000, #222222);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed; /* Change from absolute to fixed */
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body onload="navigateTo('Home')"> <!-- Call navigateTo('Home') function when the page loads -->
+    <header>
+        <h1>GLAMOUR</h1>
+        <div id="cart-icon" onclick="navigateTo('Cart')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.41a2 2 0 0 0 1.94 1.59h8.76a2 2 0 0 0 1.94-1.59L23 6H6" />
+            </svg>
+        </div>
+    </header>
+    <nav>
+        <a href="#" onclick="navigateTo('Home')">Home</a>
+        <a href="#" onclick="navigateTo('Shop')">Shop</a>
+        <a href="#" onclick="navigateTo('About')">About</a>
+        <a href="#" onclick="navigateTo('Contact')">Contact</a>
+    </nav>
+    
+    <div class="container"></div>
+    
+    <footer>
+        <p>&copy; 2024 GLAMOUR. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function navigateTo(page) {
+            const container = document.querySelector('.container');
+            if (page === 'Contact') {
+                // Replace the content of the container with contact information
+                container.innerHTML = `
+                    <div class="contact-info">
+                        <p>Email: glamour@gmail.com</p>
+                        <p>Phone: +1234567890</p>
+                        <p> Cairo, Egypt</p>
+                    </div>
+                `;
+            }
+            else if (page === 'About') {
+                // Replace the content of the container with the story about the makeup brand
+                container.innerHTML = `
+                    <div class="about-section">
+                        <p>GLAMOUR is a leading makeup brand known for its high-quality products...</p>
+                        <!-- Add more paragraphs or content as needed -->
+                    </div>
+                `;
+            } 
+            else if (page === 'Shop') {
+                container.innerHTML = `
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <img src="https://xoxo-eg.com/cdn/shop/products/xz8w9WjkhW.jpg?v=1699793942" alt="Product Image">
+                            <div class="product-info">
+                                <h2 class="product-title">Maybelline Lifter gloss</h2>
+                                <p class="product-price">$100</p>
+                                <p class="product-description">Lipgloss</p>
+                                <button class="add-to-cart" onclick="addToCart('Maybelline Lifter gloss')">Add to Cart</button>
+                            </div>
+                        </div>
+            <div class="product-card">
+                <img src="https://haytamparfumerie.com/cdn/shop/files/KM0020102310344terziario_900Wx900H.jpg?v=1686489653&width=1445" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Kiko unlimited lipgloss</h2>
+                    <p class="product-price">$200</p>
+                    <p class="product-description">lipgloss.</p>
+                    <button class="add-to-cart" onclick="addToCart('Kiko unlimited lipgloss')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://www.spacenk.com/on/demandware.static/-/Sites-spacenkmastercatalog/default/dwee780010/products/CHARLOTTE/UK200037388_CHARLOTTE_1.jpg" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Charlotte Tilbury pillow talk liquid blush</h2>
+                    <p class="product-price">$80</p>
+                    <p class="product-description">Liquid blusher.</p>
+                    <button class="add-to-cart" onclick="addToCart('Charlotte Tilbury pillow talk liquid blush')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://eg.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/79/851903/1.jpg?5540" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Maybelline Sky high mascara</h2>
+                    <p class="product-price">$50</p>
+                    <p class="product-description">Mascara.</p>
+                    <button class="add-to-cart" onclick="addToCart('Maybelline Sky high mascara')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://s.cdnsbn.com/images/products/l/27802380102.jpg" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Dior lip Oil shade 000: Clear</h2>
+                    <p class="product-price">$60</p>
+                    <p class="product-description">Lip Oil.</p>
+                    <button class="add-to-cart" onclick="addToCart('Dior lip Oil shade 000: Clear')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://i0.wp.com/lovecocome.com/wp-content/uploads/2022/01/mac_sku_M38022_640x600_0-2.webp?fit=640%2C600&ssl=1" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">MAC lipLiner</h2>
+                    <p class="product-price">$50</p>
+                    <p class="product-description">LipLiner.</p>
+                    <button class="add-to-cart" onclick="addToCart('MAC lipLiner')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://www.sephora.com/productimages/sku/s2716785-main-zoom.jpg?imwidth=315" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Anastasia Beverly Hills highlighter</h2>
+                    <p class="product-price">$25</p>
+                    <p class="product-description">Highlighter.</p>
+                    <button class="add-to-cart" onclick="addToCart('Anastasia Beverly Hills highlighter')">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://m.media-amazon.com/images/I/61GTM2F6ehL.jpg" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">LOreal paris infallible 24h more than concealer</h2>
+                    <p class="product-price">$50</p>
+                    <p class="product-description">Concealer.</p>
+                    <button class="add-to-cart" onclick="addToCart('LOreal paris infallible 24h more than concealer')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+                `;
+            }
+            else if (page === 'Cart') {
+                // Replace the content of the container with cart details
+                container.innerHTML = `
+                    <div class="cart-details">
+                        <h2>Cart Details</h2>
+                        <!-- Add cart details content here -->
+                    </div>
+                `;
+            }
+            else {
+               // Default to Home
+               container.innerHTML = `
+        <div class="home-section">
+            <h2>Welcome to GLAMOUR</h2>
+            <p>Discover the latest makeup trends and products.</p>
+            <!-- Modified product card with onclick event -->
+            <div class="product-card" onclick="navigateTo('Shop')">
+                <img src="https://media.istockphoto.com/id/1320345717/photo/various-cosmetic-accessories-for-makeup-and-manicure-on-trendy-pastel-pink-background-with.jpg?s=612x612&w=0&k=20&c=H35tfZdnHIBJLjXiX2Jfzoq32U8DrZEhZ__5l_05LsM=" alt="Product Image">
+                <div class="product-info">
+                    <h2 class="product-title">Makeup</h2>
+                    <p class="product-description">Explore our wide range of makeup products.</p>
+                </div>
+            </div>
+        </div>
+    `;
+}
+        }
+        function showProductDetails(title, price, description) {
+            alert(`Product: ${title}\nPrice: ${price}\nDescription: ${description}`);
+            // Add code to show detailed product information
+        }
+
+        function addToCart(product) {
+            const notification = document.createElement('div');
+            notification.classList.add('notification');
+            notification.textContent = `${product} added to cart`;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.right = '-300px'; // Slide out the notification
+                setTimeout(() => {
+                    notification.remove(); // Remove notification after slide out animation
+                }, 500);
+            }, 2500); // Slide in animation duration + 2 seconds
+            // Add code to add the product to the cart
+        }
+    </script>
+</body>
+</html>
